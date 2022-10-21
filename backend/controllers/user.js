@@ -1,6 +1,7 @@
 const { validateEmail, validateLength, validateUsername } = require("../helpers/validation")
 const User = require("../models/User")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { generateToken } = require("../helpers/tokens");
 exports.register = async (req, res) => {
     try {
         const {
@@ -62,6 +63,12 @@ exports.register = async (req, res) => {
             gender
         }).save();
         res.json(user)
+
+        const emailVerificationToken = generateToken(
+            { id: user._id.toString() }, 
+            "30m"
+        );
+        
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
