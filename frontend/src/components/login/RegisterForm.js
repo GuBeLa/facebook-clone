@@ -2,7 +2,7 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import RegisterInput from "../inputs/registerInput";
 
-export default function RegisterForm() {
+export default function RegisterForm({ setVisible }) {
   const userInfos = {
     first_name: "",
     last_name: "",
@@ -40,7 +40,7 @@ export default function RegisterForm() {
     <div className="blur">
       <div className="register">
         <div className="register_header">
-          <i className="exit_icon"></i>
+          <i className="exit_icon" onClick={() => setVisible(false)}></i>
           <span>Sign Up</span>
           <span>it's quick and easy</span>
         </div>
